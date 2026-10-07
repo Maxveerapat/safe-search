@@ -1,0 +1,18 @@
+{
+  "site_name": "Search Safety Flagger",
+  "report_url": "",
+  "admin_flags_csv": "admin/flags.csv",
+  "admin_allow_csv": "admin/allow.csv",
+  "groups": [
+    { "id": "hagezi-nsfw",     "name": "HaGeZi NSFW",                "short": "HaGeZi", "cat": "adult",    "license": "GPL-3.0",
+      "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/nsfw-onlydomains.txt" },
+    { "id": "hagezi-gambling", "name": "HaGeZi Gambling (mini)",     "short": "HaGeZi", "cat": "gambling", "license": "GPL-3.0",
+      "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/gambling.mini-onlydomains.txt" },
+    { "id": "hagezi-fake",     "name": "HaGeZi Fake",                "short": "HaGeZi", "cat": "fake",     "license": "GPL-3.0",
+      "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt" },
+    { "id": "hagezi-tif",      "name": "HaGeZi Threat Intel (mini)", "short": "HaGeZi", "cat": "scam",     "license": "GPL-3.0",
+      "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.mini-onlydomains.txt" },
+    { "id": "blp-scam",        "name": "Block List Project Scam",    "short": "BLP",    "cat": "scam",     "license": "Unlicense",
+      "url": "https://raw.githubusercontent.com/blocklistproject/Lists/master/alt-version/scam-nl.txt" }
+  ]
+}

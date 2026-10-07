@@ -1,0 +1,34 @@
+{
+  "name": "TEST build",
+  "buildVersion": "test-1",
+  "reportUrl": "",
+  "manifest": {
+    "version": "direct-test-1",
+    "updated": "",
+    "sources": {
+      "hagezi-nsfw":     { "name": "HaGeZi NSFW",                "short": "HaGeZi" },
+      "hagezi-gambling": { "name": "HaGeZi Gambling (mini)",     "short": "HaGeZi" },
+      "hagezi-fake":     { "name": "HaGeZi Fake",                "short": "HaGeZi" },
+      "hagezi-tif":      { "name": "HaGeZi Threat Intel (mini)", "short": "HaGeZi" },
+      "blp-scam":        { "name": "Block List Project Scam",    "short": "BLP" }
+    },
+    "groups": [
+      { "id": "hagezi-nsfw",     "cat": "adult",    "src": "hagezi-nsfw",     "sort": true, "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/nsfw-onlydomains.txt" },
+      { "id": "hagezi-gambling", "cat": "gambling", "src": "hagezi-gambling", "sort": true, "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/gambling.mini-onlydomains.txt" },
+      { "id": "hagezi-fake",     "cat": "fake",     "src": "hagezi-fake",     "sort": true, "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/fake-onlydomains.txt" },
+      { "id": "hagezi-tif",      "cat": "scam",     "src": "hagezi-tif",      "sort": true, "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.mini-onlydomains.txt" },
+      { "id": "blp-scam",        "cat": "scam",     "src": "blp-scam",        "sort": true, "url": "https://raw.githubusercontent.com/blocklistproject/Lists/master/alt-version/scam-nl.txt" }
+    ],
+    "admin": [
+      { "domain": "pantip.com", "category": "other", "reason": "MOCK admin entry for testing — not actually unsafe",
+        "history": [ { "date": "2026-01-06", "event": "Added (mock)" }, { "date": "2026-07-14", "event": "Second report (mock)" }, { "date": "2026-10-08", "event": "Re-checked (mock)" } ] },
+      { "domain": "sanook.com", "category": "other", "reason": "MOCK admin entry for testing — not actually unsafe",
+        "history": [ { "date": "2026-06-04", "event": "Added (mock)" } ] },
+      { "domain": "quora.com", "category": "fake", "reason": "MOCK admin entry in the Fake category — not actually unsafe",
+        "history": [ { "date": "2026-03-01", "event": "Added (mock)" }, { "date": "2026-09-25", "event": "Re-checked (mock)" } ] }
+    ],
+    "allow": [
+      { "domain": "wikipedia.org", "date": "2026-10-08", "reason": "MOCK allowlist entry for testing" }
+    ]
+  }
+}

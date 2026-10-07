@@ -1,0 +1,106 @@
+<title>Flagger Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: single narrow column, phone-first; big copy button is the hero, steps follow in order. */
+:root {
+  --bg: #f3f5f8; --surface: #ffffff; --ink: #18202b; --muted: #5b6676; --line: #d9dee6;
+  --accent: #2f55d4; --accent-ink: #ffffff; --accent-soft: #e6ecfd; --good: #1f7a45; --good-soft: #e3f4ea; --warn-soft: #fff4d6; --warn: #7a4f01;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151b; --surface: #1a2029; --ink: #e8ecf2; --muted: #9aa5b4; --line: #2c3440;
+  --accent: #8aa6ff; --accent-ink: #10131a; --accent-soft: #22305a; --good: #7fd6a0; --good-soft: #17352a; --warn-soft: #3a2f12; --warn: #f2c66b; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11151b; --surface: #1a2029; --ink: #e8ecf2; --muted: #9aa5b4; --line: #2c3440;
+  --accent: #8aa6ff; --accent-ink: #10131a; --accent-soft: #22305a; --good: #7fd6a0; --good-soft: #17352a; --warn-soft: #3a2f12; --warn: #f2c66b; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; margin: 0; }
+.wrap { max-width: 620px; margin: 0 auto; padding-inline: 18px; padding-block: 28px 56px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(28px, 7vw, 40px); font-weight: 800; line-height: 1.08; margin-top: 6px; }
+h2 { font-size: 20px; font-weight: 800; margin-top: 32px; }
+.lede { color: var(--muted); margin: 10px 0 0; }
+.copybox { margin-top: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.copy { width: 100%; border: 0; border-radius: 12px; padding: 16px; font: 700 18px var(--font-body); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.copy:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.copy.done { background: var(--good); }
+.status { min-height: 1.5em; margin: 8px 0 0; font-size: 14px; color: var(--muted); text-align: center; }
+details { margin-top: 10px; }
+summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+textarea { width: 100%; height: 110px; margin-top: 8px; font: 11px/1.4 var(--font-mono); border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: var(--bg); color: var(--ink); resize: vertical; }
+ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 14px 0 0; display: grid; gap: 12px; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+ol.steps li::before { content: counter(s); font: 800 18px var(--font-display); color: var(--accent); background: var(--accent-soft); border-radius: 10px; display: grid; place-items: center; height: 34px; }
+ol.steps b { font-weight: 700; }
+kbd { font: 600 14px var(--font-mono); background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 1px 6px; }
+.tip { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--good-soft); font-size: 15px; }
+.warnbox { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--warn); font-size: 15px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.tbl { overflow-x: auto; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-display); background: var(--accent-soft); }
+td:first-child { font-family: var(--font-mono); color: var(--accent); width: 34px; }
+.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">{{NAME}}</div>
+  <h1>Add Search Safety Flagger to Chrome</h1>
+  <p class="lede">Labels every Google result with a safety tag on your phone, in normal Chrome. Setup takes about 2 minutes and is done once.</p>
+
+  <div class="copybox">
+    <button class="copy" id="copy" type="button">Copy code</button>
+    <p class="status" id="status" role="status"></p>
+    <details>
+      <summary>Show the code</summary>
+      <textarea id="code" readonly aria-label="Bookmark code"></textarea>
+    </details>
+  </div>
+
+  <h2>Save it as a bookmark</h2>
+  <ol class="steps">
+    <li><span>Tap <b>Copy code</b> above.</span></li>
+    <li><span>In Chrome, tap <b>⋮</b> then <b>☆</b> to bookmark this page. Chrome shows “Bookmarked”. Tap <b>Edit</b>.</span></li>
+    <li><span>Change the name to <kbd>ssf</kbd>.</span></li>
+    <li><span>Clear the URL box, long-press it and <b>Paste</b>. It should start with <kbd>javascript:</kbd>. Tap back to save.</span></li>
+  </ol>
+  <div class="tip"><b>Easier on a computer:</b> with Chrome sync on, do the same steps in Chrome on your computer. The bookmark appears on your phone automatically.</div>
+
+  <h2>Use it</h2>
+  <ol class="steps">
+    <li><span>Search Google in Chrome as usual.</span></li>
+    <li><span>Tap the address bar, type <kbd>ssf</kbd>, and tap the suggestion with the <b>☆</b> star.</span></li>
+    <li><span>Labels appear on every result. Use <b>⚙ Filter</b> to hide categories, tap a label for its dated history, and tap <b>✕</b> to turn it off.</span></li>
+  </ol>
+  <div class="warnbox">Tapping the bookmark from Chrome's Bookmarks screen does <b>not</b> run it on Android. Always type <kbd>ssf</kbd> in the address bar.</div>
+
+  <p class="foot">Build {{VERSION}}. When the admin ships new features you'll get a new link; list updates arrive automatically.</p>
+</div>
+
+<script>
+(() => {
+  const code = {{BOOKMARKLET_JSON}};
+  const ta = document.getElementById("code");
+  const btn = document.getElementById("copy");
+  const status = document.getElementById("status");
+  ta.value = code;
+  const ok = () => { btn.textContent = "Copied ✓"; btn.classList.add("done"); status.textContent = "Now bookmark this page and paste it as the URL."; };
+  btn.addEventListener("click", () => {
+    const fallback = () => {
+      document.querySelector("details").open = true;
+      ta.focus(); ta.select(); ta.setSelectionRange(0, code.length);
+      let done = false;
+      try { done = document.execCommand("copy"); } catch (e) { done = false; }
+      if (done) ok(); else status.textContent = "Copy didn't work here. The code is selected below — long-press it and choose Copy.";
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(ok, fallback);
+    else fallback();
+  });
+})();
+</script>

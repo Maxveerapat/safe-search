@@ -1,0 +1,4 @@
+domain,category,date,event,reason
+promo-mock.example,scam,2026-10-01,Reported by user,Fake free-credit promotion (example row - replace with real entries)
+promo-mock.example,scam,2026-10-02,Confirmed by admin,
+livestream-mock.example,fake,2026-09-15,Added,Fake football stream that pushes betting sign-ups (example row)
