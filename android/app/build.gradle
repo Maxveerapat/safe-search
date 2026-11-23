@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+def runNumber = Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER") ?: "1")
+
+android {
+    namespace 'app.safesearch.shield'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'app.safesearch.shield'
+        minSdk 26
+        targetSdk 35
+        versionCode runNumber
+        versionName "0.1." + runNumber
+    }
+
+    // Fixed test signing key, so each new build installs over the previous one.
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        debug { signingConfig signingConfigs.debug }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

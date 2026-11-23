@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Search Safety Shield</string>
+    <string name="service_description">Reads search result pages in your browsers so it can hide results for sites that can\'t load safely on your connection. It checks each result\'s site from this phone. It doesn\'t collect or send what you browse anywhere.</string>
+</resources>
